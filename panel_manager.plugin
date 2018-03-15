@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python3
+Module=panel_manager
+IAge=3
+Name=Panel manager
+Description=Display/hide gedit panels in a single click
+Description[fr]=Afficher/masquer les panneaux de gedit d'un seul clic.
+Authors=Romain F. T.
+Website=https://perdu.com/
