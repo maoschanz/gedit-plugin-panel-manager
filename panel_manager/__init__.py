@@ -30,12 +30,20 @@ class PanelManagerGeditPlugin(GObject.Object, Gedit.WindowActivatable):
 	def __init__(self):
 		GObject.Object.__init__(self)
 		self.button_side = Gtk.ToggleButton()
+		settings = Gtk.Settings.get_default()
+		img1 = "/builder-view-left-pane-symbolic"
+		img2 = "/builder-view-bottom-pane-symbolic"
+		if settings.get_property("gtk-application-prefer-dark-theme"):
+			img1 += "-light"
+			img2 += "-light"
+		img1 += ".symbolic.png"
+		img2 += ".symbolic.png"
 		imageL = Gtk.Image()
-		imageL.set_from_file(BASE_PATH + "/builder-view-left-pane-symbolic.symbolic.png")
+		imageL.set_from_file(BASE_PATH + img1)
 		self.button_side.add(imageL)
 		self.button_bottom = Gtk.ToggleButton()
 		imageI = Gtk.Image()
-		imageI.set_from_file(BASE_PATH + "/builder-view-bottom-pane-symbolic.symbolic.png")
+		imageI.set_from_file(BASE_PATH + img2)
 		self.button_bottom.add(imageI)
 		self.btnBox = Gtk.Box()
 		self.btn_align = Gtk.Alignment(
