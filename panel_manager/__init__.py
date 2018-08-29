@@ -29,22 +29,21 @@ class PanelManagerGeditPlugin(GObject.Object, Gedit.WindowActivatable):
 
 	def __init__(self):
 		GObject.Object.__init__(self)
-		self.button_side = Gtk.ToggleButton()
 		settings = Gtk.Settings.get_default()
-		img1 = "/builder-view-left-pane-symbolic"
-		img2 = "/builder-view-bottom-pane-symbolic"
+		icon_name_Lat = "/builder-view-left-pane-symbolic"
+		icon_name_Inf = "/builder-view-bottom-pane-symbolic"
 		if settings.get_property("gtk-application-prefer-dark-theme"):
-			img1 += "-light"
-			img2 += "-light"
-		img1 += ".symbolic.png"
-		img2 += ".symbolic.png"
-		imageL = Gtk.Image()
-		imageL.set_from_file(BASE_PATH + img1)
-		self.button_side.add(imageL)
+			icon_name_Lat += ".svg"
+			icon_name_Inf += ".svg"
+		else:
+			icon_name_Lat += ".symbolic.png"
+			icon_name_Inf += ".symbolic.png"
+		self.button_side = Gtk.ToggleButton()
+		imageLat = Gtk.Image().new_from_file(BASE_PATH + icon_name_Lat)
+		self.button_side.add(imageLat)
 		self.button_bottom = Gtk.ToggleButton()
-		imageI = Gtk.Image()
-		imageI.set_from_file(BASE_PATH + img2)
-		self.button_bottom.add(imageI)
+		imageInf = Gtk.Image().new_from_file(BASE_PATH + icon_name_Inf)
+		self.button_bottom.add(imageInf)
 		self.btnBox = Gtk.Box()
 		self.btn_align = Gtk.Alignment(
 			xalign=0.0, yalign=0.5, xscale=0.0, yscale=0.0)
@@ -56,6 +55,7 @@ class PanelManagerGeditPlugin(GObject.Object, Gedit.WindowActivatable):
 		else:
 			self._bar = self.window.get_statusbar()
 			self._bar.pack_end(self.btn_align, expand=False, fill=False, padding=5)
+		self.btnBox.get_style_context().add_class('linked')
 		self.btnBox.add(self.button_side)
 		self.btnBox.add(self.button_bottom)
 		self.btn_align.add(self.btnBox)
@@ -65,8 +65,7 @@ class PanelManagerGeditPlugin(GObject.Object, Gedit.WindowActivatable):
 		self.button_bottom.connect("toggled", self.on_bottom_click)
 
 	def do_deactivate(self):
-		Gtk.Container.remove(self._bar, self.button_side)
-		Gtk.Container.remove(self._bar, self.button_bottom)
+		Gtk.Container.remove(self._bar, self.btn_align)
 		del self.button_side
 		del self.button_bottom
 
@@ -85,5 +84,4 @@ class PanelManagerGeditPlugin(GObject.Object, Gedit.WindowActivatable):
 		
 	def on_bottom_changed(self, a, b):
 		self.button_bottom.set_active(self.window.get_bottom_panel().get_property("visible"))
-
 
