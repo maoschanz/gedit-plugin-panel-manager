@@ -9,8 +9,8 @@ mkdir -p $INSTALL_DIR
 
 echo "Installing $INSTALL_DIR/panel_manager.plugin"
 cp panel_manager.plugin $INSTALL_DIR/panel_manager.plugin
-echo "Installing $INSTALL_DIR/panel_manager/*"
-cp -r panel_manager $INSTALL_DIR/
+echo "Installing $INSTALL_DIR/panel_manager.py"
+cp -r panel_manager.py $INSTALL_DIR/panel_manager.py
 
 echo "Done."
 exit 0
