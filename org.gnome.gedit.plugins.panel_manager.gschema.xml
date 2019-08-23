@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+	<schema id="org.gnome.gedit.plugins.panel_manager" path="/org/gnome/gedit/plugins/panel_manager/">
+		<key type="i" name="position">
+			<default>2</default>
+			<summary>Position of the widgets</summary>
+			<description>0 is top-left, 1 is top-right, 2 is bottom.</description>
+		</key>
+	</schema>
+</schemalist>
+
+
