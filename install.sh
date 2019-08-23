@@ -1,15 +1,17 @@
 #!/bin/bash
 
-if [ ! -d "$HOME/.local/share/gedit" ]; then
-	mkdir ~/.local/share/gedit
+if (( $EUID == 0 )); then
+	INSTALL_DIR="/usr/lib/x86_64-linux-gnu/gedit/plugins"
+else
+	INSTALL_DIR="$HOME/.local/share/gedit/plugins"
 fi
-if [ ! -d "$HOME/.local/share/gedit/plugins" ]; then
-	mkdir ~/.local/share/gedit/plugins
-fi
+mkdir -p $INSTALL_DIR
 
-cp panel_manager.plugin ~/.local/share/gedit/plugins/panel_manager.plugin
-cp -r panel_manager ~/.local/share/gedit/plugins/
+echo "Installing $INSTALL_DIR/panel_manager.plugin"
+cp panel_manager.plugin $INSTALL_DIR/panel_manager.plugin
+echo "Installing $INSTALL_DIR/panel_manager/*"
+cp -r panel_manager $INSTALL_DIR/
 
-#sudo cp markdown_preview.py /usr/lib/x86_64-linux-gnu/gedit/plugins/markdown_preview.py
-#sudo cp markdown_preview.plugin /usr/lib/x86_64-linux-gnu/gedit/plugins/markdown_preview.plugin
+echo "Done."
+exit 0
 

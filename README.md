@@ -8,7 +8,7 @@ This is a plugin for the Gedit text editor, giving an easy access to controls fo
 
 - Download the project & extract the archive (or clone the repo).
 - Open the project's folder `gedit-plugin-panel-manager-master` in a terminal
-- Run the `install.sh` script (_without root privileges_)
+- Run the `install.sh` script
 
 
 
